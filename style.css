@@ -599,10 +599,11 @@ footer {
 }
 
 /* --- AGRESÍVNA OPRAVA REPETÍCIE NA MOBILE --- */
+/* --- OPRAVENÁ MOBILNÁ OPTIMALIZÁCIA (max 768px) --- */
 @media (max-width: 768px) {
   
   body {
-    /* 1. PRIBLÍŽENIE: Mapa bude o 50% väčšia ako displej, čo vráti ostrosť */
+    /* 1. PRIBLÍŽENIE: Mapa bude ostrejšia */
     background-size: 150% auto !important;
 
     /* 2. OPAKOVANIE: Mapa sa bude dlaždicovo opakovať pod sebou */
@@ -615,7 +616,8 @@ footer {
     background-position: top center !important;
   }
 
-    .hero, .hero-team, .hero-contact {
+  /* TOTO BOLO PREDTÝM VYPADNUTÉ Z MEDIA QUERY */
+  .hero, .hero-team, .hero-contact {
     /* Zmenšíme výšku bloku, aby fotka nebola taká pretiahnutá */
     height: 45vh !important;
     min-height: 45vh !important;
@@ -629,15 +631,16 @@ footer {
 
   /* Upravíme nadpis, aby na mobile nezaberal polovicu displeja */
   .hero h1 {
-    font-size: 3rem !important;
-    /* padding: 0 10px; */
+    font-size: 2.8rem !important; /* Mierne zmenšené pre lepšiu čitateľnosť */
   }
 
   /* Dlaždice posunieme tak, aby neprekrývali nápis na malom displeji */
   .grid-container {
-    margin-top: -20px !important;
+    margin-top: -30px !important; /* Jemnejší posun na mobile */
     gap: 15px;
+    padding: 0 15px;
   }
-}
+} 
+/* KONIEC MEDIA QUERY - Zátvorka musí byť až úplne tu na konci */
 
 
