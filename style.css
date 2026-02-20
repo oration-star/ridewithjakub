@@ -601,15 +601,28 @@ footer {
 /* --- AGRESÍVNA OPRAVA REPETÍCIE NA MOBILE --- */
 @media (max-width: 768px) {
   
+@media (max-width: 768px) {
+  
   body {
-    /* 1. ZÁKAZ OPAKOVANIA: Toto zmaže tie fotky pod sebou */
+    /* 1. ZMENA: Namiesto 'cover' dáme napr. 120%, aby sa mapa tak nenatiahla */
+    /* Čím menšie percento dáš, tým viac bude mapa oddialená (skús 100%, 120% alebo 150%) */
+    background-size: 120% auto !important; 
+
+    /* 2. ZÁKAZ OPAKOVANIA: Aby mapa nebola pod sebou viackrát */
     background-repeat: no-repeat !important;
-    /* 2. FIXÁCIA: Na mobile musí byť 'scroll', inak to blbne */
+
+    /* 3. FIXÁCIA: Na mobile radšej 'scroll', aby to nesekalo */
     background-attachment: scroll !important;
-    /* 3. VEĽKOSŤ: 'cover' roztiahne jednu fotku na celú šírku aj výšku */
-    background-size: cover !important;
+
+    /* 4. POZÍCIA: Mapu vycentrujeme, aby si videl jej stred */
     background-position: center center !important;
+    
+    /* Farba pozadia pod mapou (ak by niekde chýbala) */
+    background-color: #1a1a1a; 
   }
+
+  /* Ostatné nastavenia pre .hero a dlaždice nechaj tak, ako sme ich dali predtým */
+}
 
   .hero, .hero-team, .hero-contact {
     /* Zmenšíme výšku bloku, aby fotka nebola taká pretiahnutá */
