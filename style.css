@@ -62,7 +62,7 @@ body {
 /* --- OPRAVENÝ HLAVNÝ NADPIS --- */
 .hero h1 {
     font-family: 'Chakra Petch', sans-serif;
-    font-size: clamp(4rem, 16vw, 20rem); 
+    font-size: clamp(4rem, 12vw, 8rem); 
     font-weight: 900;
     text-transform: uppercase;
     color: #ffffff; /* Plná biela farba bez obrysov */
