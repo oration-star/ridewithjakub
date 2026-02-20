@@ -598,41 +598,40 @@ footer {
   color: #888;
 }
 
-/* --- ŠPECIÁLNA OPRAVA PRE MOBILY (obrazovky menšie ako 768px) --- */
+/* --- AGRESÍVNA OPRAVA REPETÍCIE NA MOBILE --- */
 @media (max-width: 768px) {
   
-  /* 1. Oprava hlavného pozadia (Mapa) */
   body {
-    /* Na mobile 'fixed' nefunguje dobre, zmeníme na 'scroll' */
+    /* 1. ZÁKAZ OPAKOVANIA: Toto zmaže tie fotky pod sebou */
+    background-repeat: no-repeat !important;
+    /* 2. FIXÁCIA: Na mobile musí byť 'scroll', inak to blbne */
     background-attachment: scroll !important;
-    /* Fotku roztiahneme na celú plochu, aby tam neboli biele miesta */
-    background-size: cover !important;
-    background-position: center center;
-  }
-
-  /* 2. Oprava Hero sekcie (Fotka s nápisom) */
-  .hero, .hero-team, .hero-contact {
-    /* Zmenšíme výšku na mobile, aby nezaberala celú obrazovku */
-    height: 50vh !important; 
-    min-height: 50vh !important;
-    
-    /* Vypneme fixovanie pozadia */
-    background-attachment: scroll !important;
-    /* 'cover' zabezpečí, že fotka vyplní celý horný blok */
+    /* 3. VEĽKOSŤ: 'cover' roztiahne jednu fotku na celú šírku aj výšku */
     background-size: cover !important;
     background-position: center center !important;
   }
 
-  /* 3. Úprava dlaždíc na mobile */
-  .grid-container {
-    /* Menej prázdneho miesta po bokoch */
-    padding: 20px 10px;
-    /* Dlaždice budú mať o niečo menší horný margin, aby nekryli nápis */
-    margin-top: -40px !important;
+  .hero, .hero-team, .hero-contact {
+    /* Zmenšíme výšku bloku, aby fotka nebola taká pretiahnutá */
+    height: 45vh !important;
+    min-height: 45vh !important;
+    
+    /* Zákaz opakovania aj tu */
+    background-repeat: no-repeat !important;
+    background-attachment: scroll !important;
+    background-size: cover !important;
+    background-position: center center !important;
   }
 
-  /* Aby nápis nebol na mobile príliš gigantický */
+  /* Upravíme nadpis, aby na mobile nezaberal polovicu displeja */
   .hero h1 {
-    font-size: 3rem !important;
+    font-size: 2.5rem !important;
+    padding: 0 10px;
+  }
+
+  /* Dlaždice posunieme tak, aby neprekrývali nápis na malom displeji */
+  .grid-container {
+    margin-top: -20px !important;
+    gap: 15px;
   }
 }
