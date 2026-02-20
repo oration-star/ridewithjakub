@@ -1,216 +1,621 @@
-/* ==========================================================================
-   1. GLOBÁLNE NASTAVENIA & OSTROSŤ (OPRAVA MAZĽAVOSTI)
-   ========================================================================== */
+/* Globálne nastavenia */
 * {
-    box-sizing: border-box;
-    /* Vynútenie ostrejšieho vykresľovania pre okná a obrázky */
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-    margin: 0;
-    padding: 0;
-    color: #ffffff;
-    background-color: #1a1a1a;
+  /* font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #ff7011; */
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  margin: 0;
+  padding: 0;
 
-    /* MAPA NA POZADÍ - Optimalizácia pre výkon */
-    background: linear-gradient(rgba(26, 26, 26, 0.1), rgba(26, 26, 26, 0.1)),
-                url('mapa.png');
-    background-size: 80% auto; /* Mierne zväčšené pre lepšiu ostrosť */
-    background-position: center bottom;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+  /* PÔVODNÁ FARBA JE SMAZANÁ: background-color: #ff7011; */
+
+  /* NOVÉ POZADIE: Oranžový polopriesvitný filter + Tvoj obrázok */
+  /* Hodnota 0.8 znamená, že farba je na 80% nepriesvitná. Ak chceš viac vidieť fotku, zníž to na 0.6 alebo 0.7 */
+  background: linear-gradient(rgba(255, 112, 17, 0.0), rgba(255, 112, 17, 0.0)),
+              url('mapa.png'); /* <-- Uisti sa, že názov súboru sedí! */
+
+  /* Tieto tri riadky zabezpečia, že to bude vyzerať profesionálne */
+  background-size: 70% auto;
+     
+  background-position: fixed bottom;  /* Stred obrázka bude v strede stránky */
+  background-attachment: fixed; /* Efektné: Pozadie stojí na mieste, zatiaľ čo obsah skroluje */
 }
 
-/* ==========================================================================
-   2. HERO SEKCE (HLAVNÁ FOTKA) - FIX FIXÁCIE A OSTROSTI
-   ========================================================================== */
-.hero, .hero-team, .hero-contact {
-    height: 75vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    background-attachment: fixed; /* Zafixovaný pohľad */
-    background-size: cover;       /* Vyplnenie plochy */
-    background-position: center center;
-    position: relative;
+/* Hero sekcia s vycentrovaným H1 */
+/* Hero sekcia s fotkou a tmavým filtrom */
+.hero {
+  /* Zväčšíme výšku, aby fotka mala viac priestoru vyniknúť */
+  height: 70vh;
+
+  background:
+    radial-gradient(circle, transparent 40%, rgba(22, 22, 22, 0.3) 100%),
+    url("main_image.jpg");
+
+
+
+  /* Možnosť C: Jemné doladenie v pixeloch (ak chceš byť precízny) */
+  background-position: center 80%; 
+
+  background-attachment: fixed;
+  background-size: 100% auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
-.hero { 
-    background-image: radial-gradient(circle, transparent 40%, rgba(22, 22, 22, 0.4) 100%), 
-                      url("main_image.jpg"); 
-    background-position: center 60%; /* Posun fotky, aby bolo vidieť motorku */
-}
 
-.hero-team { 
-    background-image: radial-gradient(circle, transparent 30%, rgba(0, 0, 0, 0.8) 100%), 
-                      url("team_bg.jpg"); 
-}
-
-.hero-contact { 
-    background-image: radial-gradient(circle, transparent 30%, rgba(0, 0, 0, 0.4) 100%), 
-                      url("contact_bg.jpg"); 
-}
-
-/* NADPISY */
+/* --- OPRAVENÝ HLAVNÝ NADPIS --- */
 .hero h1 {
     font-family: 'Chakra Petch', sans-serif;
-    font-size: clamp(3rem, 12vw, 8rem); /* Limitovaná veľkosť pre lepšiu ostrosť */
+    font-size: clamp(4rem, 16vw, 20rem); 
     font-weight: 900;
     text-transform: uppercase;
+    color: #ffffff; /* Plná biela farba bez obrysov */
     margin: 0;
     letter-spacing: 2px;
-    line-height: 0.9;
-    filter: drop-shadow(0 5px 20px rgba(0, 0, 0, 0.9));
-    animation: fadeInTitle 1.2s ease-out;
+    line-height: 1;
+    
+    /* Poriadny tieň pre čitateľnosť na fotke */
+    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.8));
+    
+    /* Dynamická animácia príletu */
+    animation: fadeInTitle 1.5s ease-out;
 }
 
+@keyframes fadeInTitle {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
 .hero p {
-    font-family: 'Chakra Petch', sans-serif;
-    font-size: 1.4rem;
-    margin-top: 15px;
-    font-weight: 300;
-    opacity: 0.9;
+  font-family: 'Chakra Petch', sans-serif;
+  font-size: 1.3rem;
+  opacity: 0.9;
+  margin-top: 10px;
+  font-weight: 300;
+  color: #ffffff;
+  animation: fadeInTitle 1.5s ease-out;
 }
 
-/* ==========================================================================
-   3. DLAŽDICE (VÝKONOVÝ TUNING - STOP SEKANIU)
-   ========================================================================== */
+
+/* Kontajner a mriežka (Grid) */
+.container {
+  max-width: 1100px;
+  margin: -50px auto 50px auto; /* Posunie dlaždice mierne nad Hero sekciu */
+  padding: 0 20px;
+}
+
 .grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  max-width: 1200px;
+  
+  /* ZMENA: Z -60px na -120px vytiahne dlaždice vyššie na fotku */
+  margin: -120px auto 0 auto; 
+  
+  padding: 40px 20px;
+  position: relative;
+  z-index: 10; /* Toto zabezpečí, že dlaždice budú NAD fotkou */
+}
+
+/* Štýl dlaždíc */
+/* Základná úprava pre všetky dlaždice, aby fungovali ako odkazy */
+.tile {
+  background: rgba(26, 26, 26, 0.9); /* Tmavý podklad */
+  backdrop-filter: blur(10px); /* Rozostrenie pozadia pod dlaždicou */
+  border: 1px solid rgba(255, 102, 0, 0.2); /* Jemné oranžové lemovanie */
+  border-radius: 15px;
+  padding: 30px;
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  text-decoration: none;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Úprava pre YouTube dlaždicu pri najazde myšou */
+.youtube-tile:hover {
+    background-color: #fff5f5; /* Jemný červený nádych */
+    border-color: #ff0000;
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(255, 0, 0, 0.1);
+}
+
+.youtube-tile:hover i, 
+.youtube-tile:hover .tile-icon {
+    color: #ff0000 !important;
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+}
+
+.youtube-tile:hover h3, 
+.youtube-tile:hover .go-link,
+.youtube-tile:hover .tile-icon {
+    color: #ff0000;
+}
+
+/* .youtube-tile h3 {
+  font-family: "Chakra Petch", sans-serif;
+  text-transform: uppercase;
+  font-size: 1.4rem;
+  margin-bottom: 12px;
+  color: #ffffff;
+} */
+
+
+/* Štýl pre ikonu a odkaz vnútri dlaždice */
+.tile-icon {
+  font-size: 3.5rem; /* Ešte o niečo väčšia ikona */
+  margin-bottom: 20px;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Keď nabehneš na YouTube dlaždicu, ikona sa zmení na červenú */
+.youtube-tile:hover .tile-icon {
+  color: #ff0000; /* Oficiálna YouTube červená */
+  transform: scale(1.1); /* Jemné vypuknutie ikony */
+}
+
+/* Odstránenie predvoleného modrého sfarbenia odkazu pre i (ikonu) */
+.tile i {
+  font-size: 2.5rem;
+  color: #ff6600; /* Oranžové ikony */
+  margin-bottom: 20px;
+}
+
+.tile h3 {
+  font-family: "Chakra Petch", sans-serif;
+  text-transform: uppercase;
+  font-size: 1.4rem;
+  margin-bottom: 12px;
+  color: #ffffff;
+}
+
+.tile p {
+  font-size: 0.9rem;
+  color: #cccccc;
+  line-height: 1.5;
+}
+
+.go-link {
+  margin-top: auto;
+  font-weight: 700;
+  color: #ff6600;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+}
+
+.youtube-tile:hover .go-link {
+  color: #ff0000;
+}
+/* Koniec nastavenie youtube dlazdice */
+/* Nastavenie ino instagramu */
+/* Špecifický štýl pre Instagram dlaždicu */
+.insta-tile:hover {
+  /* Jemný ružovo-fialový nádych pozadia */
+  background-color: #fff5f9;
+  border-color: #e1306c;
+}
+
+.insta-tile:hover h3,
+.insta-tile:hover .go-link {
+  color: #e1306c;
+}
+
+/* Špeciálny efekt pre Instagram ikonu */
+.insta-tile:hover .tile-icon {
+  /* Instagram gradient na ikonu */
+  background: radial-gradient(
+    circle at 30% 107%,
+    #fdf497 0%,
+    #fdf497 5%,
+    #fd5949 45%,
+    #d6249f 60%,
+    #285aeb 90%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transform: scale(1.1);
+}
+/* koniec insta ikone */
+/* =============================================================================================================== */
+/* Timova ikova */
+.team-tile:hover {
+  background-color: #fcfcfc;
+  border-color: #2c3e50; /* Tmavá korporátna farba */
+}
+
+.team-tile:hover h3,
+.team-tile:hover .tile-icon,
+.team-tile:hover .go-link {
+  color: #2c3e50;
+}
+
+.team-tile:hover .tile-icon {
+  transform: scale(1.1) rotate(5deg); /* Jemné otočenie pre dynamiku */
+}
+
+/* koniec stylu ikony tim */
+
+/* styl stranku tim */
+
+/* Menšia verzia Hero sekcie pre podstránky */
+
+/* Špecifické pozadie pre tímovú stránku */
+.hero-team {
+  /* 1. VÝŠKA: Použi min-height namiesto height. 
+     60vh je zlatá stredná cesta. Ak chceš viac, daj 80vh. */
+  min-height: 70vh;
+
+  background:
+    radial-gradient(circle, transparent 30%, rgba(0, 0, 0, 0.8) 100%),
+    url("team_bg.jpg");
+
+  /* 2. ODDIALENIE: 
+     'contain' zabezpečí, že uvidíš CELÚ fotku bez orezania.
+     Ak chceš, aby vyplnila šírku, ale bola oddialená, daj '100% auto'. */
+  background-size: 100% auto;
+
+  /* 3. POZÍCIA: 
+     Aby si videl spodnú hranu, musíš zmeniť 'fixed' na 'scroll'.
+     'fixed' totálne rozbíja centrovanie na spodok pri nízkych fotkách. */
+  background-position: center;
+  background-attachment: scroll;
+  background-repeat: no-repeat;
+
+  /* 4. CENTROVANIE TEXTU */
+  display: flex;
+  flex-direction: column; /* Aby nápis a tlačidlo boli pod sebou */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* 1. Kontajner pre karty pod sebou */
+.team-grid {
+    display: flex !important;
+    flex-direction: column;
     gap: 25px;
-    max-width: 1250px;
-    margin: -110px auto 60px auto; /* Prekrytie fotky */
-    padding: 0 25px;
+    max-width: 900px;
+    /* ZMENA: margin -60px vytiahne karty hore a odstráni prázdny pásik */
+    margin: -60px auto 100px auto; 
+    align-items: center; /* Vycentrovanie kariet na stred */
     position: relative;
     z-index: 10;
 }
 
-.tile {
-    background: rgba(26, 26, 26, 0.96); /* Takmer plná farba pre MAX výkon */
-    backdrop-filter: blur(4px);         /* Znížené z 10px - web prestane sekať */
-    -webkit-backdrop-filter: blur(4px);
-    border: 1px solid rgba(255, 102, 0, 0.2);
-    border-radius: 20px;
-    padding: 35px 25px;
-    text-align: center;
-    text-decoration: none;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    
-    /* HARDVÉROVÁ AKCELERÁCIA */
-    transform: translateZ(0); 
-    will-change: transform, box-shadow;
-}
-
-.tile:hover {
-    transform: translateY(-12px) scale(1.02);
-    background: rgba(35, 35, 35, 1);
-    box-shadow: 0 20px 40px rgba(255, 102, 0, 0.25);
-    border-color: rgba(255, 102, 0, 0.6);
-}
-
-.tile-icon { font-size: 3.5rem; margin-bottom: 20px; color: #ff6600; transition: 0.3s; }
-.tile h3 { font-family: "Chakra Petch", sans-serif; text-transform: uppercase; font-size: 1.4rem; margin: 0 0 15px 0; }
-.tile p { font-size: 0.9rem; color: #cccccc; line-height: 1.5; margin-bottom: 20px; }
-.go-link { margin-top: auto; font-weight: 700; color: #ff6600; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; }
-
-/* ŠPECIFICKÉ HOVERY (Zjednotené) */
-.youtube-tile:hover i, .youtube-tile:hover .go-link, .youtube-tile:hover h3 { color: #ff0000 !important; }
-.insta-tile:hover i, .insta-tile:hover .go-link, .insta-tile:hover h3 { color: #e1306c !important; }
-.bazos-tile:hover i, .bazos-tile:hover .go-link, .bazos-tile:hover h3 { color: #0056b3 !important; }
-
-/* ==========================================================================
-   4. TÍM & KONTAKT (INTERAKTIVITA A DARK DESIGN)
-   ========================================================================== */
-.team-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    max-width: 850px;
-    margin: -80px auto 80px auto;
-    padding: 0 20px;
-}
-
+/* 2. Samotná karta */
 .person-card {
-    background: rgba(26, 26, 26, 0.95);
-    border: 1px solid rgba(255, 102, 0, 0.3);
-    border-radius: 20px;
+    background: rgba(26, 26, 26, 0.9) !important; /* Tmavá farba z hlavnej stránky */
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 102, 0, 0.3); /* Jemná oranžová linka */
     padding: 30px;
+    border-radius: 20px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 30px;
-    transition: 0.4s;
+    width: 100%;
+    max-width: 800px;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     cursor: pointer;
+    color: #ffffff; /* Biely text na tmavom pozadí */
 }
 
+/* 3. FIX PRE FOTKY (Toto ti opraví tie obrovské obrázky) */
+.person-img {
+  flex-shrink: 0; /* Zabráni stlačeniu krúžku */
+  width: 100px; /* Fixná šírka */
+  height: 100px; /* Fixná výška */
+  border-radius: 50%; /* Dokonalý kruh */
+  overflow: hidden;
+  border: 3px solid #f0f0f0;
+}
+
+.person-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Fotka vyplní kruh bez deformácie */
+  display: block;
+}
+
+/* 4. Textové informácie */
+.person-info {
+  color: #333;
+  display: flex;
+  flex-direction: column;
+}
+
+.person-info h2 {
+    font-family: "Chakra Petch", sans-serif;
+    color: #ffffff; /* Biely nadpis v základe */
+    transition: color 0.3s ease;
+}
+
+.role {
+    color: #ff6600 !important; /* Oranžová KTM rola v oboch režimoch */
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+}
+
+/* 5. EFEKT ROZBALENIA */
+.person-info-content {
+  max-height: 0; /* Schovaný text */
+  opacity: 0; /* Priesvitný text */
+  overflow: hidden;
+  transition: all 0.5s ease-in-out;
+}
+
+/* Aktivácia pri hoveri */
 .person-card:hover {
-    background: #ffffff !important;
-    transform: translateX(15px);
+    background: #ffffff !important; /* Karta sa rozsvieti na bielo */
+    border-color: #ff6600;         /* Oranžový okraj KTM */
+    transform: translateX(15px);   /* Posun pre dynamiku */
+    box-shadow: 0 15px 40px rgba(255, 102, 0, 0.2);
 }
 
-.person-card:hover h2, .person-card:hover p, .person-card:hover .phone-link { color: #1a1a1a !important; }
+/* Zmena farby textu vnútri karty pri hoveri */
+.person-card:hover h2,
+.person-card:hover p,
+.person-card:hover .phone-link {
+    color: #1a1a1a !important; /* Text stmavne na bielom podklade */
+}
+.person-card:hover .person-info-content {
+  max-height: 500px; /* Rozbalenie celého obsahu */
+  opacity: 1;
+  margin-top: 15px;
+}
 
-.person-img { width: 100px; height: 100px; border-radius: 50%; overflow: hidden; border: 3px solid #ff6600; flex-shrink: 0; }
-.person-img img { width: 100%; height: 100%; object-fit: cover; }
+/* 6. Kontakt */
+.contact-info {
+  margin-top: 15px;
+}
 
-/* KONTAKTNÝ FORMULÁR */
+.phone-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #1a1a1a;
+  text-decoration: none;
+  font-weight: bold;
+  background: #f1f1f1;
+  padding: 8px 15px;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.phone-link:hover {
+  background: #27ae60;
+  color: white;
+}
+/* Toto je ten "binding" na class="back-btn" */
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 15px;
+  padding: 10px 20px;
+
+  /* Farba textu a ikonky */
+  color: #ffffff !important;
+  text-decoration: none;
+
+  /* Orámovanie a pozadie, aby bolo tlačidlo vidieť */
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 25px;
+  background: rgba(0, 0, 0, 0.2); /* Jemné stmavenie pod textom */
+
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+  background: #ffffff;
+  color: #1a1a1a !important;
+  transform: translateY(-2px);
+}
+/* koniec strankz tim  */
+/* Špecifický štýl pre Bazoš dlaždicu */
+.bazos-tile:hover {
+  border-color: #0056b3; /* Bazoš modrá */
+  background-color: #f0f4f8;
+}
+
+.bazos-tile:hover h3,
+.bazos-tile:hover .go-link {
+  color: #0056b3;
+}
+
+.bazos-tile:hover .tile-icon {
+  color: #cc0000; /* Bazoš červená pre ikonu pri hoveri */
+  transform: scale(1.1) rotate(-10deg); /* Jemné naklonenie cenovky */
+}
+
+/* Špecifický štýl pre Moto prepravu (Úžitková oranžová) */
+.transport-tile:hover {
+  border-color: #f39c12;
+  background-color: #fffcf5; /* Veľmi jemný oranžový nádych pozadia */
+}
+
+.transport-tile:hover h3,
+.transport-tile:hover .go-link {
+  color: #f39c12;
+}
+
+.transport-tile:hover .tile-icon {
+  color: #d35400; /* Tmavšia, kontrastnejšia oranžová pre ikonu */
+  /* Ikona sa zväčší a posunie doprava ako pri jazde */
+  transform: scale(1.1) translateX(8px);
+}
+
+
+/* 2. Štýl pre Kontakt dlaždicu */
+.contact-tile:hover {
+  border-color: #3498db; /* Jasná modrá */
+  background-color: #f7fbff;
+}
+
+.contact-tile:hover h3,
+.contact-tile:hover .go-link {
+  color: #3498db;
+}
+
+.contact-tile:hover .tile-icon {
+  color: #2980b9;
+  /* Efekt "štartujúceho" lietadla */
+  transform: scale(1.1) translate(10px, -10px);
+  transition: all 0.4s ease;
+}
+
+/* --- KONTAKTNÁ STRÁNKA --- */
+
+/* Špecifické pozadie pre kontakt (ak chceš inú fotku) */
+/* --- BINDING PRE HERO SEKCIU --- */
+
+/* Medzera pod nadpisom pre tlačidlo */
+.hero-content .back-btn {
+  margin-top: 25px;
+}
+.hero-contact {
+  background:
+    radial-gradient(circle, transparent 30%, rgba(0, 0, 0, 0.2) 100%),
+    url("contact_bg.jpg"); /* Tu vlož fotku svojej dielne alebo motoriek */
+  background-size: cover;
+  background-position: center bottom +25%;
+}
 .contact-container {
-    max-width: 600px;
-    margin: -100px auto 60px auto;
-    background: rgba(26, 26, 26, 0.98);
-    border: 1px solid rgba(255, 102, 0, 0.4);
-    border-radius: 25px;
-    padding: 45px;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+  max-width: 600px; /* Toto udrží formulár v peknom boxe v strede */
+  margin: -80px auto 50px auto;
+   background: rgba(26, 26, 26, 0.95) !important; 
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 102, 0, 0.3); /* Jemný KTM oranžový okraj */
+    border-radius: 20px;
+    padding: 50px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    color: #ffffff; /* Celý text v boxe bude biely */
+  
 }
 
-.form-group label { color: #ff6600; font-weight: 700; text-transform: uppercase; font-size: 0.8rem; margin-bottom: 8px; display: block; }
-.form-group input, .form-group textarea {
-    width: 100%; background: #222; border: 1px solid #444; color: #fff; padding: 15px; border-radius: 10px; margin-bottom: 20px;
+/* Nadpis "NAPÍŠTE NÁM SPRÁVU" */
+.contact-form-wrapper h2 {
+    font-family: "Chakra Petch", sans-serif;
+    color: #ffffff;
+    border-bottom: 2px solid #ff6600; /* Oranžová linka pod nadpisom */
+    padding-bottom: 15px;
+    display: inline-block;
 }
 
+.form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column; /* Polia budú pod popiskami */
+  text-align: left;
+}
+
+/* Popisky polí (Meno, E-mail, atď.) */
+.form-group label {
+    color: #ff6600 !important; /* Oranžové popisky pre lepší tech look */
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+}
+
+/* Samotné vstupné polia */
+.form-group input, 
+.form-group textarea {
+    background: #333 !important; /* Tmavé vnútro polí */
+    border: 1px solid #444;
+    color: #ffffff !important;   /* Biely text, ktorý píšeš */
+    border-radius: 8px;
+    padding: 15px;
+}
+
+/* Efekt, keď klikneš do poľa */
+.form-group input:focus, 
+.form-group textarea:focus {
+    border-color: #ff6600;
+    box-shadow: 0 0 10px rgba(255, 102, 0, 0.2);
+    outline: none;
+}
+
+/* Tlačidlo odoslať */
 .submit-btn {
-    width: 100%; padding: 16px; background: #ff6600; color: #fff; border: none; border-radius: 12px; font-weight: 800; cursor: pointer; transition: 0.3s;
+  width: 100%;
+  padding: 15px;
+  background: #1a1a1a;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.3s ease;
 }
-.submit-btn:hover { background: #e65c00; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(255, 102, 0, 0.3); }
 
-/* ==========================================================================
-   5. MOBILNÁ OPTIMALIZÁCIA (PLYNULOSŤ A ČITATEĽNOSŤ)
-   ========================================================================== */
+.submit-btn:hover {
+  background: #27ae60; /* Zelená pri úspešnom "odoslaní" */
+  transform: translateY(-2px);
+}
+.required-star {
+  color: #e74c3c; /* Červená farba */
+  margin-left: 3px;
+}
+/* Pätička */
+footer {
+  text-align: center;
+  padding: 40px;
+  color: #888;
+}
+
+/* --- AGRESÍVNA OPRAVA REPETÍCIE NA MOBILE --- */
 @media (max-width: 768px) {
-    body {
-        background-size: 180% auto; /* Väčšia mapa pre ostrosť na mobile */
-        background-attachment: scroll; /* Fixné pozadie na mobile spôsobuje lagy */
-    }
+  
+  body {
+    /* 1. PRIBLÍŽENIE: Mapa bude o 50% väčšia ako displej, čo vráti ostrosť */
+    background-size: 150% auto !important;
 
-    .hero, .hero-team, .hero-contact {
-        height: 50vh;
-        background-attachment: scroll;
-    }
+    /* 2. OPAKOVANIE: Mapa sa bude dlaždicovo opakovať pod sebou */
+    background-repeat: repeat !important;
 
-    .hero h1 { font-size: 2.8rem; }
-    
-    .grid-container {
-        margin-top: -50px;
-        gap: 15px;
-    }
+    /* 3. FIXÁCIA: Na mobile musí byť 'scroll', aby sa mapa hýbala s prstom */
+    background-attachment: scroll !important;
 
-    .person-card { flex-direction: column; text-align: center; }
+    /* 4. POZÍCIA: Začíname od vrchu stránky */
+    background-position: top center !important;
+  }
+
+  /* Ostatné nastavenia (Hero, Nadpisy) nechaj tak, ako sme ich mali predtým */
 }
 
-/* ANIMÁCIE */
-@keyframes fadeInTitle {
-    from { opacity: 0; transform: translateY(30px) scale(0.98); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
-}
 
-footer { text-align: center; padding: 50px; color: #666; font-size: 0.8rem; }
