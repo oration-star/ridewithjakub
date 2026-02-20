@@ -606,7 +606,7 @@ footer {
   body {
     /* 1. ZMENA: Namiesto 'cover' dáme napr. 120%, aby sa mapa tak nenatiahla */
     /* Čím menšie percento dáš, tým viac bude mapa oddialená (skús 100%, 120% alebo 150%) */
-    background-size: 50% auto !important; 
+    background-size: 100% auto !important; 
 
     /* 2. ZÁKAZ OPAKOVANIA: Aby mapa nebola pod sebou viackrát */
     background-repeat: no-repeat !important;
