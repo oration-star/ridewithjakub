@@ -597,3 +597,42 @@ footer {
   padding: 40px;
   color: #888;
 }
+
+/* --- ŠPECIÁLNA OPRAVA PRE MOBILY (obrazovky menšie ako 768px) --- */
+@media (max-width: 768px) {
+  
+  /* 1. Oprava hlavného pozadia (Mapa) */
+  body {
+    /* Na mobile 'fixed' nefunguje dobre, zmeníme na 'scroll' */
+    background-attachment: scroll !important;
+    /* Fotku roztiahneme na celú plochu, aby tam neboli biele miesta */
+    background-size: cover !important;
+    background-position: center center;
+  }
+
+  /* 2. Oprava Hero sekcie (Fotka s nápisom) */
+  .hero, .hero-team, .hero-contact {
+    /* Zmenšíme výšku na mobile, aby nezaberala celú obrazovku */
+    height: 50vh !important; 
+    min-height: 50vh !important;
+    
+    /* Vypneme fixovanie pozadia */
+    background-attachment: scroll !important;
+    /* 'cover' zabezpečí, že fotka vyplní celý horný blok */
+    background-size: cover !important;
+    background-position: center center !important;
+  }
+
+  /* 3. Úprava dlaždíc na mobile */
+  .grid-container {
+    /* Menej prázdneho miesta po bokoch */
+    padding: 20px 10px;
+    /* Dlaždice budú mať o niečo menší horný margin, aby nekryli nápis */
+    margin-top: -40px !important;
+  }
+
+  /* Aby nápis nebol na mobile príliš gigantický */
+  .hero h1 {
+    font-size: 3rem !important;
+  }
+}
