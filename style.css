@@ -601,27 +601,21 @@ footer {
 /* --- AGRESÍVNA OPRAVA REPETÍCIE NA MOBILE --- */
 @media (max-width: 768px) {
   
-@media (max-width: 768px) {
-  
   body {
-    /* 1. ZMENA: Namiesto 'cover' dáme napr. 120%, aby sa mapa tak nenatiahla */
-    /* Čím menšie percento dáš, tým viac bude mapa oddialená (skús 100%, 120% alebo 150%) */
-    background-size: 150% auto !important; 
+    /* 1. PRIBLÍŽENIE: Mapa bude o 50% väčšia ako displej, čo vráti ostrosť */
+    background-size: 150% auto !important;
 
-    /* 2. ZÁKAZ OPAKOVANIA: Aby mapa nebola pod sebou viackrát */
-    background-repeat: no-repeat !important;
+    /* 2. OPAKOVANIE: Mapa sa bude dlaždicovo opakovať pod sebou */
+    background-repeat: repeat !important;
 
-    /* 3. FIXÁCIA: Na mobile radšej 'scroll', aby to nesekalo */
+    /* 3. FIXÁCIA: Na mobile musí byť 'scroll', aby sa mapa hýbala s prstom */
     background-attachment: scroll !important;
 
-    /* 4. POZÍCIA: Mapu vycentrujeme, aby si videl jej stred */
-    background-position: center center !important;
-    
-    /* Farba pozadia pod mapou (ak by niekde chýbala) */
-    background-color: #1a1a1a; 
+    /* 4. POZÍCIA: Začíname od vrchu stránky */
+    background-position: top center !important;
   }
 
-  /* Ostatné nastavenia pre .hero a dlaždice nechaj tak, ako sme ich dali predtým */
+  /* Ostatné nastavenia (Hero, Nadpisy) nechaj tak, ako sme ich mali predtým */
 }
 
   .hero, .hero-team, .hero-contact {
