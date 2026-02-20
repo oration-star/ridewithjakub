@@ -62,7 +62,7 @@ body {
 /* --- OPRAVENÝ HLAVNÝ NADPIS --- */
 .hero h1 {
     font-family: 'Chakra Petch', sans-serif;
-    font-size: clamp(3rem, 13vw, 8.5rem); 
+    font-size: clamp(4rem, 15vw, 10rem); 
     font-weight: 900;
     text-transform: uppercase;
     color: #ffffff; /* Plná biela farba bez obrysov */
@@ -632,8 +632,8 @@ footer {
 
   /* Upravíme nadpis, aby na mobile nezaberal polovicu displeja */
   .hero h1 {
-    font-size: 2.5rem !important;
-    padding: 0 10px;
+    font-size: 4.5rem !important;
+    /* padding: 0 10px; */
   }
 
   /* Dlaždice posunieme tak, aby neprekrývali nápis na malom displeji */
